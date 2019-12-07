@@ -14,7 +14,12 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if (Auth::user()->isModerator())
+                        Привет Модератор!
+                    @else
+                        Привет Клиент!
+                    @endif
+
                 </div>
             </div>
         </div>
