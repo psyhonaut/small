@@ -11,7 +11,7 @@ class AddUserRole extends Migration
       Schema::table('users', function (Blueprint $table) {
           $table->unsignedSmallInteger('role')->after('name');
       });
-
+      
       DB::table('users')->update([
           'role' => App\User::ROLE_CLIENT,
       ]);
