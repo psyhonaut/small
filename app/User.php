@@ -37,9 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Проверяем роль пользователя.
+     * Если модератор, возвращаем истина
+     */
     const ROLE_CLIENT = 1;
     const ROLE_MODERATOR = 10;
-    
+
     public function isModerator(): bool
     {
         return $this->role === self::ROLE_MODERATOR;
