@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use Faker\Generator as Faker;
+
 class TicketsTableSeeder extends Seeder
 {
     /**
@@ -12,8 +14,8 @@ class TicketsTableSeeder extends Seeder
     public function run()
     {
         $tickets = [];
-        $timestart = "2019-12-07 08:00:00";
-        $timeend = "2019-12-31 18:00:00";
+        $timestart = "2019-11-12 08:00:00";
+        $timeend = "2019-12-12 18:00:00";
 
         for( $i = 1; $i <= 30; $i++ )
         {
