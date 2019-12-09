@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.app')
 
 @section('content')
   <div class="container text-center">
@@ -11,9 +11,7 @@
 
       <h2 class="my-5">Просмотр всех тикетов</h2>
 
-      @php
-      $departmentsCol = App\Department::all();
-      @endphp
+      <div id="todos-example"></div>
 
       <form>
         <div class="form-row text-right">
@@ -38,10 +36,7 @@
         </div>
       </form>
 
-      @component('components.ticketsList', [
-        'ticketsCol' => $ticketsCol
-      ])
-      @endcomponent
+      @component('components.ticketsList', compact('ticketsCol'))@endcomponent
 
       @if ($ticketsCol->total() > $ticketsCol->count())
         <nav aria-label="Page navigation example">

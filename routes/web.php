@@ -14,3 +14,11 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::resource('ticket', 'TicketController')
+  ->only(['create', 'store', 'show', 'storeReply'])
+  ->names('ticket');
+
+Route::resource('ticketReply', 'TicketReplyController')
+  ->only(['store'])
+  ->names('ticketReply');

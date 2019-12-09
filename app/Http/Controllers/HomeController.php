@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use App;
+use App\Ticket;
+use App\Department;
 
 class HomeController extends Controller
 {
@@ -26,18 +27,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-      /**
-       * Вывод запросов в зависимости от роли пользователя.
-       */
-      if (Auth::user()->isModerator()) {
-        $ticketsCol = App\Ticket::orderBy('created_at', 'desc')->paginate(10);
+      if (Auth::user()->isModerator())
+      {
+        $ticketsCol = Ticket::orderBy('created_at', 'desc')->paginate(10);
       } else {
         $userID = Auth::id();
-        $ticketsCol = App\Ticket::all()->where('user_id', $userID)->orderBy('created_at', 'desc')->paginate(10);
+        $ticketsCol = Ticket::where('user_id', $userID)->orderBy('created_at', 'desc')->paginate(10);
       }
-        return view('index', [
-          'ticketsCol' => $ticketsCol
-        ]);
+      $departmentsCol = Department::all();
+      return view('home', compact('ticketsCol', 'departmentsCol'));
     }
 }

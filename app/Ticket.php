@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
 
+  protected $fillable
+    = [
+      'department_id',
+      'user_id',
+      'title',
+      'description'
+    ];
+
   /*
    * Получить последний ответ на заявку
    */
@@ -14,5 +22,4 @@ class Ticket extends Model
   {
     return $this->hasMany('App\TicketReply')->orderBy('created_at', 'asc');
   }
-
 }
