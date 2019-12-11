@@ -33,16 +33,18 @@
           <div class="card-body p-5">
 
             <div class="w-100 d-flex justify-content-end">
-              <select
-              name="department_id"
-              id="department_id"
-              class="form-control col-md-2"
-              required>
-              <option value="">Выберите отдел</option>
-              @foreach ($departmentsCol as $department)
-                <option value="{{ $department->id }}">{{ $department->name }}</option>
-              @endforeach
-            </select>
+              <div class="col-auto">
+                <select
+                name="department_id"
+                id="department_id"
+                class="custom-select my-1 mr-sm-2"
+                required>
+                <option value="">Выберите отдел</option>
+                @foreach ($departmentsCol as $department)
+                  <option value="{{ $department->id }}">{{ $department->name }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
 
           <label class="h5 mt-5" for="title">Заголовок</label>

@@ -5,9 +5,10 @@
   $departmentObj = App\Department::find($ticketObj->department_id);
   @endphp
 
-    <div class="card w-100 shadow-sm mb-5 text-left" data-department="{{ $departmentObj->id }}">
+    <div class="card w-100 shadow-sm mb-5 text-left {{ ( $ticketObj->active ? 'open' : 'close') }}" style="font-size: inherit;
+font-weight: inherit; float:none;">
       <div class="card-header d-flex align-items-end justify-content-between py-3">
-        <div class="h4 m-0">
+        <div class="h5 m-0">
           {{ $userObj->name }}
         </div>
         <div class="h6 m-0">
@@ -15,7 +16,7 @@
         </div>
       </div>
       <div class="card-body">
-        <h4 class="card-title mt-4">{{ $ticketObj->title }}</h4>
+        <h5 class="card-title mt-4">{{ $ticketObj->title }}</h5>
         <p class="card-text">{{ $ticketObj->description }}</p>
 
         @php
@@ -31,7 +32,7 @@
 
           <div class="card bg-light mb-4 mt-5">
             <div class="card-header d-flex justify-content-between">
-              <div class="h5 m-0">
+              <div class="h6 m-0">
                 {{ $userReplyObj->name }}
               </div>
               {{ date('Y-m-d H:i', strtotime($replyLastObj->created_at)) }}
@@ -50,11 +51,11 @@
       </div>
       <div class="card-footer text-right">
 
-        <a href="{{ route('ticket.show', $ticketObj->id) }}" class="btn btn-info" role="button" aria-disabled="true">Просмотр тикета</a>
+        <a href="{{ route('ticket.show', $ticketObj->id) }}" class="btn btn-light" role="button" aria-disabled="false">Просмотр тикета</a>
 
         @if ($ticketObj->active)
           @if (Auth::user()->isModerator())
-            <a href="#" class="btn btn-primary ml-3" role="button" aria-disabled="true">Закрыть тикет</a>
+            <a href="{{ route('close', $ticketObj->id) }}" class="btn btn-primary ml-3" role="button" aria-disabled="false">Закрыть тикет</a>
           @endif
         @else
           <button type="button" class="btn btn-secondary ml-3">Тикет закрыт</button>

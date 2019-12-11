@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Ticket;
 use App\Department;
+use Illuminate\Support\Facades\DB;
+use App\Filter\TicketFilter;
+use App\TicketReply;
 
 class HomeController extends Controller
 {
@@ -25,16 +28,32 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-      if (Auth::user()->isModerator())
-      {
-        $ticketsCol = Ticket::orderBy('created_at', 'desc')->paginate(10);
-      } else {
-        $userID = Auth::id();
-        $ticketsCol = Ticket::where('user_id', $userID)->orderBy('created_at', 'desc')->paginate(10);
-      }
+      $query = DB::table('tickets');
+
+      $ticketsCol = (new TicketFilter($query, $request))
+                        ->apply()
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10);
+
       $departmentsCol = Department::all();
+
       return view('home', compact('ticketsCol', 'departmentsCol'));
+
     }
+
+      public function close($id)
+      {
+          $ticketObj = Ticket::find($id);
+
+          if($ticketObj)
+          {
+            $ticketObj->active = false;
+            $ticketObj->save();
+            return redirect()->back()->with(['success' => 'Тикет успешно закрыт']);
+          }
+
+          return redirect()->back()->withErrors(['msg' => 'Ошибка сохранения']);
+      }
 }

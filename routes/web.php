@@ -16,9 +16,11 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('ticket', 'TicketController')
-  ->only(['create', 'store', 'show', 'storeReply'])
+  ->only(['create', 'store', 'show'])
   ->names('ticket');
 
 Route::resource('ticketReply', 'TicketReplyController')
   ->only(['store'])
   ->names('ticketReply');
+
+Route::get('/{id}', 'HomeController@close')->name('close');

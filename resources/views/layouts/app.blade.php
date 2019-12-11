@@ -9,32 +9,30 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 <body class="bg-light">
+
     <div id="app">
+
+      @auth
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Главная
                 </a>
 
-                @auth
-                  @if (!Auth::user()->isModerator())
-                    <a class="btn btn-primary btn-sm" href="{{ route('ticket.create') }}">
-                      Создать тикет
-                    </a>
-                  @endif
-                @endauth
+                @if (!Auth::user()->isModerator())
+                  <a class="btn btn-primary btn-sm" href="{{ route('ticket.create') }}">
+                    Создать тикет
+                  </a>
+                @endif
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -82,12 +80,14 @@
             </div>
         </nav>
 
+        @endauth
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>
