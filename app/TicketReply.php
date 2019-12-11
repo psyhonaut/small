@@ -12,4 +12,12 @@ class TicketReply extends Model
         'user_id',
         'description'
       ];
+
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
+  public function ticket()
+  {
+      return $this->belongsTo(Ticket::class);
+  }
 }

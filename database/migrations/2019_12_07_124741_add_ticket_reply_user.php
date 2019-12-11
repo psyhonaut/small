@@ -6,15 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 class AddTicketReplyUser extends Migration
 {
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
   public function up()
   {
       Schema::table('ticket_replies', function (Blueprint $table) {
           $table->unsignedBigInteger('user_id')->after('ticket_id');
           $table->foreign('user_id')->references('id')->on('users');
       });
-
   }
 
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
   public function down()
   {
       Schema::table('ticket_replies', function (Blueprint $table) {

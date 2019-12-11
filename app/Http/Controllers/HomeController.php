@@ -34,7 +34,7 @@ class HomeController extends Controller
 
       $ticketsCol = (new TicketFilter($query, $request))
                         ->apply()
-                        ->orderBy('created_at', 'desc')
+                        ->orderBy('last_active', 'desc')
                         ->paginate(10);
 
       $departmentsCol = Department::all();

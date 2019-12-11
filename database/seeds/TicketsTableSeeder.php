@@ -14,8 +14,8 @@ class TicketsTableSeeder extends Seeder
     public function run()
     {
         $tickets = [];
-        $timestart = "2019-11-12 08:00:00";
-        $timeend = "2019-12-12 18:00:00";
+        $timestart = now()->subMonths(1);
+        $timeend = now();
 
         for( $i = 1; $i <= 30; $i++ )
         {
@@ -29,12 +29,13 @@ class TicketsTableSeeder extends Seeder
             'description'   => 'При установки программы выходит ошибка #' . rand(1, 9) . '00',
             'active'        => rand(0, 1),
             'created_at'    => date('Y-m-d H:i:s', $newtime),
-            'updated_at'    => date('Y-m-d H:i:s', $newtime)
+            'updated_at'    => date('Y-m-d H:i:s', $newtime),
+            'last_active'    => date('Y-m-d H:i:s', $newtime)
           ];
 
           DB::table('tickets')->insert($ticket);
 
-          factory(App\TicketReply::class, rand(2, 5))->create();
+          factory(App\TicketReply::class, rand(0, 8))->create();
 
         }
 

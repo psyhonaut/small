@@ -50,7 +50,7 @@
       @if ($ticketsCol->total() > $ticketsCol->count())
         <nav aria-label="Page navigation example">
           <ul class="pagination">
-            {{ $ticketsCol->links() }}
+            {{ $ticketsCol->appends(['department' => request()->department, 'active' => request()->active])->render() }}
           </ul>
         </nav>
       @endif

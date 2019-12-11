@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\TicketReply;
 use App\Http\Requests\TicketReplyCreateRequest;
+use App\Ticket;
 
 class TicketReplyController extends Controller
 {
@@ -24,6 +25,14 @@ class TicketReplyController extends Controller
     {
       $data = $request->input();
       $item = (new TicketReply())->create($data);
+
+      $ticketObj = Ticket::find($item->ticket_id);
+
+      if($ticketObj)
+      {
+        $ticketObj->last_active = $item->created_at;
+        $ticketObj->save();
+      }
 
       if($item)
       {

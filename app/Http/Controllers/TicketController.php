@@ -57,7 +57,7 @@ class TicketController extends Controller
   public function show($id)
   {
     $ticketObj = Ticket::find($id);
-    $ticketReplyCol = Ticket::find($ticketObj->id)->reply;
+    $ticketReplyCol = Ticket::find($ticketObj->id)->replyAll;
     $userObj = User::find($ticketObj->user_id);
     $departmentObj = Department::find($ticketObj->department_id);
     return view('ticket.show', compact('ticketObj', 'ticketReplyCol', 'userObj', 'departmentObj'));

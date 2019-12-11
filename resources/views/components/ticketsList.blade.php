@@ -20,13 +20,12 @@ font-weight: inherit; float:none;">
         <p class="card-text">{{ $ticketObj->description }}</p>
 
         @php
-        $replyCol = App\Ticket::find($ticketObj->id)->reply;
+        $replyLastObj = App\Ticket::find($ticketObj->id)->replyLast->first();
         @endphp
 
-        @if (!$replyCol->isEmpty())
+        @if (!empty($replyLastObj->user_id))
 
           @php
-          $replyLastObj = $replyCol->sortByDesc('created_at')->first();
           $userReplyObj = App\User::find($replyLastObj->user_id);
           @endphp
 

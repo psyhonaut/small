@@ -15,10 +15,18 @@ class Ticket extends Model
       'description'
     ];
 
+    /*
+     * Получить последний ответ на заявку
+     */
+    public function replyLast()
+    {
+      return $this->hasMany('App\TicketReply')->orderBy('created_at', 'desc');
+    }
+
   /*
-   * Получить последний ответ на заявку
+   * Получить все ответы
    */
-  public function reply()
+  public function replyAll()
   {
     return $this->hasMany('App\TicketReply')->orderBy('created_at', 'asc');
   }
