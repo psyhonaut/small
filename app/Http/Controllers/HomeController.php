@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Ticket;
 use App\Department;
-use Illuminate\Support\Facades\DB;
 use App\Filter\TicketFilter;
-use App\TicketReply;
 
 class HomeController extends Controller
 {
@@ -30,17 +28,15 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-      $query = DB::table('tickets');
+      $query = Ticket::orderBy('last_active', 'desc');
 
       $ticketsCol = (new TicketFilter($query, $request))
                         ->apply()
-                        ->orderBy('last_active', 'desc')
                         ->paginate(10);
 
       $departmentsCol = Department::all();
 
       return view('home', compact('ticketsCol', 'departmentsCol'));
-
     }
 
       public function close($id)

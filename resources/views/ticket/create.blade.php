@@ -2,16 +2,7 @@
 
 @section('content')
 
-  <div class="container">
-    <div class="row">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-light">
-          <li class="breadcrumb-item"><a href="{{ url('/') }}">Главная</a></li>
-          <li class="breadcrumb-item active" aria-current="page">создание тикета</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <breadcrumb itemname="создание тикета"></breadcrumb>
 
   <div class="container">
     <h2 class="text-center my-5">Создание нового тикета</h2>
@@ -22,11 +13,7 @@
     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::id() }}">
     <div class="container">
 
-      @if ($errors->any())
-        <div class="alert alert-danger" role="alert">
-          {{ $errors->first() }}
-        </div>
-      @endif
+    @include('components.alert')
 
       <div class="row">
         <div class="card w-100 form-group">

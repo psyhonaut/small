@@ -2,47 +2,14 @@
 
 @section('content')
 
-  <div class="container">
-    <div class="row">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb bg-light">
-        <li class="breadcrumb-item"><a href="{{ url('/') }}">Главная</a></li>
-        <li class="breadcrumb-item active" aria-current="page">просмотр тикета</li>
-      </ol>
-    </nav>
-  </div>
-  </div>
+  <breadcrumb itemname="просмотр тикета"></breadcrumb>
 
   <div class="container mb-5">
     <h3 class="text-center my-5">Просмотр тикета</h3>
 
-    @if ($errors->any())
-      <div class="alert alert-danger" role="alert">
-        {{ $errors->first() }}
-      </div>
-    @endif
+    @include('components.alert')
 
-    @if (session('success'))
-      <div class="alert alert-success" role="alert">
-        {{ session()->get('success') }}
-      </div>
-    @endif
-
-    <div class="card w-100 shadow-sm mb-5 text-left" data-department="{{ $departmentObj->id }}">
-      <div class="card-header d-flex align-items-end justify-content-between py-3">
-        <div class="h4 m-0">
-          {{ $userObj->name }}
-        </div>
-        <div class="h6 m-0">
-          {{ $departmentObj->name }} / {{ date('Y-m-d H:i', strtotime($ticketObj->created_at)) }}
-        </div>
-      </div>
-      <div class="card-body">
-        <h4 class="card-title mt-4">{{ $ticketObj->title }}</h4>
-        <p class="card-text">{{ $ticketObj->description }}</p>
-
-      </div>
-    </div>
+    @component('components.ticket', compact('userObj', 'departmentObj', 'ticketObj'))@endcomponent
 
     <h3 class="text-center my-5">Диалог:</h3>
 
@@ -53,17 +20,12 @@
       $replyFloat = ( $userReplyObj->role == 10 ? 'float-left' : 'float-right' );
       @endphp
 
-      <div class="d-block card mb-4 mt-5 col-md-9 px-0 {{ $replyFloat }}">
-        <div class="card-header d-flex justify-content-between">
-          <div class="h5 m-0">
-            {{ $userReplyObj->name }}
-          </div>
-          {{ date('Y-m-d H:i', strtotime($ticketReplyObj->created_at)) }}
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{ $ticketReplyObj->description }}</p>
-        </div>
-      </div>
+      <ticket-reply
+        username="{{ $userReplyObj->name }}"
+        date="{{ $ticketReplyObj->created_at->format('Y-m-d H:i') }}"
+        description="{{ $ticketReplyObj->description }}"
+        class="d-block card mb-4 mt-5 col-md-9 px-0 {{ $replyFloat }}"
+      ></ticket-reply>
 
     @endforeach
 

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Ticket;
-use App\TicketReply;
 use App\User;
 use App\Department;
 use App\Http\Requests\TicketCreateRequest;

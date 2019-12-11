@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-
+  protected $dates = ['created_at'];
   protected $fillable
     = [
       'department_id',
@@ -16,7 +16,7 @@ class Ticket extends Model
     ];
 
     /*
-     * Получить последний ответ на заявку
+     * Получить все ответы и отсориторовать по убыванию
      */
     public function replyLast()
     {
@@ -24,7 +24,7 @@ class Ticket extends Model
     }
 
   /*
-   * Получить все ответы
+   * Получить все ответы и отсориторовать по возрастанию
    */
   public function replyAll()
   {
