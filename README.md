@@ -37,18 +37,29 @@
 2. Установите или используйте [Git](https://git-scm.com/download)  
 3. Создайте пустую базу данных для проекта.
 4. Запустите терминал в папке куда будет клонироваться репозиторий проекта. И выполните следующую команду:
+
     git clone https://github.com/psyhonaut/small.git
+
 5. Создайте в корне проекта файл .env и скопируте содержимой .env.example, обновите значения настройек.
 6. Перейдите в вашем терминале в папку small использую следующую команду:
-    cd small
+
+    'cd small
+
 7. Запустите процесс пересборки проекта командой:
-    composer install && composer update
+
+     composer install && composer update
+
 8. Выполните следуюшую команду для генерации ключа:
-    php artisan key:gen
+
+     php artisan key:gen
+
 9. Выполните миграцию:
-    php artisan migrate
+
+     php artisan migrate
+
 10. Заполните базу фейковыми данными следующей командой:
-    php artisan db:seed
+
+     php artisan db:seed
 
 Откройте браузер и перейдите по адресу располложения проекта.
 
