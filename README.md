@@ -1,78 +1,63 @@
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Система заявок в тех. поддержку на базе Laravel 6.6.2 (PHP 7+)
 
-## About Laravel
+Готовая система заявок для технической поддержки, в которой клиент может создать тикет о своей проблеме, после создание тикета клиент может вести диалог с модератором внутри тикета. Когда проблема устранена, модератор может закрыть тикет нажатием на кнопку "закрыть тикет":
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Главная страница / Просмотр всех тикетов
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Если пользователь не авторизован, на главной странице ему отображается форма с входом, если авторизован то выводится список тикетов
+- Модератор может просматривать тикеты всех пользователей, клиент может просматривать только свои тикеты
+- Только клиент может создавать тикеты.
+- Есть фильтр который показывает тикеты созданные для определенного департамента + фильтр который скрывает/показывает закрытые тикеты
+- Тикет может закрыть только модератор (в закрытом тикете нет возможности вести диалог)
+- У каждого тикета отображается последний ответ если он имеется
+- Сортировка тикетов идет по времени создания тикета + по времени последнего ответа клиента (новые вверху)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Страница создания тикета
 
-## Learning Laravel
+- Тикет содержит три поля, (Заголовок, Описание, Отдел)
+- Отделы храниться в отдельной таблице (всего 3 отдела: IT отдел, Отдел продаж, Финансовый отдел)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Страница просмотра тикета
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Клиент и модератор ведут диалог внутри тикета
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Фреймворки, плагины и дополнительные расширения
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+В приложенни используется фреймворк [Bootstrap](https://getbootstrap.com) и [Vue](https://ru.vuejs.org).
+Для организации авторизации добавлен рекомендуемый пакет [laravel/ui](https://laravel.com/docs/6.x/authentication#included-routing)
+Есть настроенный генератор фейковых данных [Database: Seeding](https://laravel.com/docs/6.x/seeding).
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Установка
 
-## Code of Conduct
+1. Установите или используйте [composer](https://getcomposer.org)
+2. Установите или используйте [Git](https://git-scm.com/download)  
+3. Создайте пустую базу данных для проекта.
+4. Запустите терминал в папке куда будет клонироваться репозиторий проекта. И выполните следующую команду:
+    git clone https://github.com/psyhonaut/small.git
+5. Создайте в корне проекта файл .env и скопируте содержимой .env.example, обновите значения настройек.
+6. Перейдите в вашем терминале в папку small использую следующую команду:
+    cd small
+7. Запустите процесс пересборки проекта командой:
+    composer install && composer update
+8. Выполните следуюшую команду для генерации ключа:
+    php artisan key:gen
+9. Выполните миграцию:
+    php artisan migrate
+10. Заполните базу фейковыми данными следующей командой:
+    php artisan db:seed
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Откройте браузер и перейдите по адресу располложения проекта.
 
-## Security Vulnerabilities
+#Всё!
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## Фейковые данные
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+У всех фейковых пользователей пароль: password
+
+8 первых пользователей - клиенты
+2 последних пользователя - модераторы
